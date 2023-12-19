@@ -36,33 +36,45 @@ import java.util.Map;
 
 public class Solution {
 
-  public int[] twoSum(int[] nums, int target) {
+public int[] twoSum(int[] nums, int target) {
+    // Create a HashMap to store the elements of the array and their indices
     Map<Integer, Integer> map = new HashMap<>();
 
+    // Iterate through the array
     for (int i = 0; i < nums.length; i++) {
-      int res = target - nums[i];
+        // Calculate the complement (the value needed to reach the target)
+        int complement = target - nums[i];
 
-      if (map.containsKey(res) && i != map.get(res)) return new int[] {map.get(res), i};
-      else map.put(nums[i], i);
+        // Check if the complement is already in the map and its index is not the same as the current index
+        if (map.containsKey(complement) && i != map.get(complement)) {
+            // Return the indices of the two numbers that add up to the target
+            return new int[] {map.get(complement), i};
+        } else {
+            // If the complement is not found, put the current element and its index in the map
+            map.put(nums[i], i);
+        }
     }
 
+    // If no such pair is found, return null
     return null;
-  }
+}
 
+
+ 
   public static void main(String[] args) {
     Solution solution = new Solution();
-    int[] res = new int[2];
+    int[] complement = new int[2];
 
     // should be [0, 1]
-    res = solution.twoSum(new int[] {2, 7, 11, 15}, 9);
-    System.out.println(res[0] + " " + res[1]);
+    complement = solution.twoSum(new int[] {2, 7, 11, 15}, 9);
+    System.out.println(complement[0] + " " + complement[1]);
 
     // should be [0, 1]
-    res = solution.twoSum(new int[] {3, 3}, 6);
-    System.out.println(res[0] + " " + res[1]);
+    complement = solution.twoSum(new int[] {3, 3}, 6);
+    System.out.println(complement[0] + " " + complement[1]);
 
     // should be [1, 2]
-    res = solution.twoSum(new int[] {3, 2, 4}, 6);
-    System.out.println(res[0] + " " + res[1]);
+    complement = solution.twoSum(new int[] {3, 2, 4}, 6);
+    System.out.println(complement[0] + " " + complement[1]);
   }
 }
